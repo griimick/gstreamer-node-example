@@ -1,39 +1,47 @@
-#include "hello.h"
+#include <napi.h>
+#include "actualcallback.cpp"
 
-std::string hello::hello(){
-	return "Hello World";
-}
-
-int hello::add(int a, int b){
-	return a + b;
-}
-
-Napi::String hello::HelloWrapped(const Napi::CallbackInfo& info) 
+void SumAsyncCallback(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
-	Napi::String returnValue = Napi::String::New(env, hello::hello());
 
-	return returnValue;
-}
-
-Napi::Number hello::AddWrapped(const Napi::CallbackInfo& info) {
-	Napi::Env env = info.Env();
-	if (info.Length() < 2 || !info[0].IsNumber() || !info[1].IsNumber()) {
-		Napi::TypeError::New(env, "Number expected").ThrowAsJavaScriptException();
+	//
+	// Account for known potential issues that MUST be handled by
+	// synchronously throwing an `Error`
+	//
+	if (info.Length() < 3)
+	{
+		Napi::TypeError::New(env, "Invalid argument count").ThrowAsJavaScriptException();
+		return;
 	}
 
-	Napi::Number first = info[0].As<Napi::Number>();
-	Napi::Number second = info[1].As<Napi::Number>();
+	if (!info[2].IsFunction())
+	{
+		Napi::TypeError::New(env, "Invalid argument types").ThrowAsJavaScriptException();
+		return;
+	}
 
-	int returnValue = hello::add(first.Int32Value(), second.Int32Value());
+	//
+	// Handle all other potential issues asynchronously via the provided callback
+	//
 
-	return Napi::Number::New(env, returnValue);
-}
+	Napi::Function cb = info[2].As<Napi::Function>();
 
-Napi::Object hello::Init(Napi::Env env, Napi::Object exports) 
-{
-	exports.Set("hello", Napi::Function::New(env, hello::HelloWrapped));
-	exports.Set("add", Napi::Function::New(env, hello::AddWrapped));
+	if (info.Length() != 3)
+	{
+		(new ErrorAsyncWorker(cb, Napi::TypeError::New(env, "Invalid argument count")))->Queue();
+	}
+	else if (!info[0].IsNumber() || !info[1].IsNumber())
+	{
+		(new ErrorAsyncWorker(cb, Napi::TypeError::New(env, "Invalid argument types")))->Queue();
+	}
+	else
+	{
+		double arg0 = info[0].As<Napi::Number>().DoubleValue();
+		double arg1 = info[1].As<Napi::Number>().DoubleValue();
 
-	return exports;
+		(new SumAsyncWorker(cb, arg0, arg1))->Queue();
+	}
+
+	return;
 }

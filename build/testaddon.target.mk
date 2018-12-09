@@ -42,7 +42,7 @@ INCS_Debug := \
 	-I/home/griimick/.node-gyp/10.10.0/deps/uv/include \
 	-I/home/griimick/.node-gyp/10.10.0/deps/zlib \
 	-I/home/griimick/.node-gyp/10.10.0/deps/v8/include \
-	-I/home/griimick/github/test-addon/node_modules/node-addon-api
+	-I/home/griimick/github/gstreamer-node-example/node_modules/node-addon-api
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=testaddon' \
@@ -81,7 +81,7 @@ INCS_Release := \
 	-I/home/griimick/.node-gyp/10.10.0/deps/uv/include \
 	-I/home/griimick/.node-gyp/10.10.0/deps/zlib \
 	-I/home/griimick/.node-gyp/10.10.0/deps/v8/include \
-	-I/home/griimick/github/test-addon/node_modules/node-addon-api
+	-I/home/griimick/github/gstreamer-node-example/node_modules/node-addon-api
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \

@@ -10,4 +10,6 @@ console.log('add()   => ', addon.add(23,45));
 console.log('Testing class initial value : ',classInstance.getValue());
 console.log('After adding 3.3 : ',classInstance.add(3.3));
 
+console.log('addCallback()   => ', addon.addCallback(2,4, (err, result) => console.log(`callback ${result} yay`) ));
+
 module.exports = addon;
