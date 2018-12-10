@@ -14,6 +14,7 @@ class ClassExample : public Napi::ObjectWrap<ClassExample> {
 		Napi::Value Add(const Napi::CallbackInfo& info); //wrapped add function
 		ActualClass *actualClass_; //internal instance of actualclass used to perform actual operations.
 
-		Napi::Value init ();
+		Napi::Value Initialize (const Napi::CallbackInfo &info);
+		Napi::Value StartPipeline (const Napi::CallbackInfo &info);
 };
 

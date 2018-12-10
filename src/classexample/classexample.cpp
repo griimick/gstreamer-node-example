@@ -2,6 +2,7 @@
 
 #include "classexample.h"
 
+
 Napi::FunctionReference ClassExample::constructor;
 
 Napi::Object ClassExample::Init(Napi::Env env, Napi::Object exports) {
@@ -10,6 +11,8 @@ Napi::Object ClassExample::Init(Napi::Env env, Napi::Object exports) {
 	Napi::Function func = DefineClass(env, "ClassExample", {
 			InstanceMethod("add", &ClassExample::Add),
 			InstanceMethod("getValue", &ClassExample::GetValue),
+			InstanceMethod("init", &ClassExample::Initialize),
+			InstanceMethod("startPipeline", &ClassExample::StartPipeline),
 			});
 
 	constructor = Napi::Persistent(func);
@@ -55,11 +58,19 @@ Napi::Value ClassExample::Add(const Napi::CallbackInfo& info) {
 	return Napi::Number::New(info.Env(), answer);
 }
 
-Napi::Value ClassExample::init (const Napi::CallbackInfo& info) {
+Napi::Value ClassExample::Initialize (const Napi::CallbackInfo& info) {
 	Napi::Env env = info.Env();
 	Napi::HandleScope scope(env);
 
 	int num = this->actualClass_->init ();
+	return Napi::Number::New(env, num);
+}
+
+Napi::Value ClassExample::StartPipeline (const Napi::CallbackInfo& info) {
+	Napi::Env env = info.Env();
+	Napi::HandleScope scope(env);
+
+	int num = this->actualClass_->start_pipeline ();
 	return Napi::Number::New(env, num);
 }
 

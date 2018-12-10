@@ -18,13 +18,10 @@ DEFS_Debug := \
 # Flags passed to all source files.
 CFLAGS_Debug := \
 	-fPIC \
-	-pthread \
-	-Wall \
 	-Wextra \
 	-Wno-unused-parameter \
 	-m64 \
-	-g \
-	-O0
+	-g
 
 # Flags passed to only C files.
 CFLAGS_C_Debug :=
@@ -35,14 +32,27 @@ CFLAGS_CC_Debug := \
 	-std=gnu++1y
 
 INCS_Debug := \
-	-I/home/avi/.node-gyp/10.13.0/include/node \
-	-I/home/avi/.node-gyp/10.13.0/src \
-	-I/home/avi/.node-gyp/10.13.0/deps/openssl/config \
-	-I/home/avi/.node-gyp/10.13.0/deps/openssl/openssl/include \
-	-I/home/avi/.node-gyp/10.13.0/deps/uv/include \
-	-I/home/avi/.node-gyp/10.13.0/deps/zlib \
-	-I/home/avi/.node-gyp/10.13.0/deps/v8/include \
-	-I/home/avi/gstreamer-node-example/node_modules/node-addon-api
+	-I/home/griimick/.node-gyp/10.10.0/include/node \
+	-I/home/griimick/.node-gyp/10.10.0/src \
+	-I/home/griimick/.node-gyp/10.10.0/deps/openssl/config \
+	-I/home/griimick/.node-gyp/10.10.0/deps/openssl/openssl/include \
+	-I/home/griimick/.node-gyp/10.10.0/deps/uv/include \
+	-I/home/griimick/.node-gyp/10.10.0/deps/zlib \
+	-I/home/griimick/.node-gyp/10.10.0/deps/v8/include \
+	-I/home/griimick/github/gstreamer-node-example/node_modules/node-addon-api \
+	-I/home/griimick/github/gst-build/subprojects/gstreamer/libs \
+	-I/home/griimick/github/gst-build/build/subprojects/gstreamer/libs \
+	-I/home/griimick/github/gst-build/subprojects/gstreamer \
+	-I/home/griimick/github/gst-build/build/subprojects/gstreamer \
+	-I/home/griimick/github/gst-build/subprojects/gst-plugins-bad/gst-libs \
+	-I/home/griimick/github/gst-build/build/subprojects/gst-plugins-bad/gst-libs \
+	-I/home/griimick/github/gst-build/subprojects/gst-plugins-base/gst-libs \
+	-I/home/griimick/github/gst-build/build/subprojects/gst-plugins-base/gst-libs \
+	-I/usr/include/json-glib-1.0 \
+	-I/usr/include/libsoup-2.4 \
+	-I/usr/include/libxml2 \
+	-I/usr/include/glib-2.0 \
+	-I/usr/lib/x86_64-linux-gnu/glib-2.0/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=testaddon' \
@@ -57,13 +67,10 @@ DEFS_Release := \
 # Flags passed to all source files.
 CFLAGS_Release := \
 	-fPIC \
-	-pthread \
-	-Wall \
 	-Wextra \
 	-Wno-unused-parameter \
 	-m64 \
-	-O3 \
-	-fno-omit-frame-pointer
+	-O3
 
 # Flags passed to only C files.
 CFLAGS_C_Release :=
@@ -74,20 +81,34 @@ CFLAGS_CC_Release := \
 	-std=gnu++1y
 
 INCS_Release := \
-	-I/home/avi/.node-gyp/10.13.0/include/node \
-	-I/home/avi/.node-gyp/10.13.0/src \
-	-I/home/avi/.node-gyp/10.13.0/deps/openssl/config \
-	-I/home/avi/.node-gyp/10.13.0/deps/openssl/openssl/include \
-	-I/home/avi/.node-gyp/10.13.0/deps/uv/include \
-	-I/home/avi/.node-gyp/10.13.0/deps/zlib \
-	-I/home/avi/.node-gyp/10.13.0/deps/v8/include \
-	-I/home/avi/gstreamer-node-example/node_modules/node-addon-api
+	-I/home/griimick/.node-gyp/10.10.0/include/node \
+	-I/home/griimick/.node-gyp/10.10.0/src \
+	-I/home/griimick/.node-gyp/10.10.0/deps/openssl/config \
+	-I/home/griimick/.node-gyp/10.10.0/deps/openssl/openssl/include \
+	-I/home/griimick/.node-gyp/10.10.0/deps/uv/include \
+	-I/home/griimick/.node-gyp/10.10.0/deps/zlib \
+	-I/home/griimick/.node-gyp/10.10.0/deps/v8/include \
+	-I/home/griimick/github/gstreamer-node-example/node_modules/node-addon-api \
+	-I/home/griimick/github/gst-build/subprojects/gstreamer/libs \
+	-I/home/griimick/github/gst-build/build/subprojects/gstreamer/libs \
+	-I/home/griimick/github/gst-build/subprojects/gstreamer \
+	-I/home/griimick/github/gst-build/build/subprojects/gstreamer \
+	-I/home/griimick/github/gst-build/subprojects/gst-plugins-bad/gst-libs \
+	-I/home/griimick/github/gst-build/build/subprojects/gst-plugins-bad/gst-libs \
+	-I/home/griimick/github/gst-build/subprojects/gst-plugins-base/gst-libs \
+	-I/home/griimick/github/gst-build/build/subprojects/gst-plugins-base/gst-libs \
+	-I/usr/include/json-glib-1.0 \
+	-I/usr/include/libsoup-2.4 \
+	-I/usr/include/libxml2 \
+	-I/usr/include/glib-2.0 \
+	-I/usr/lib/x86_64-linux-gnu/glib-2.0/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
 	$(obj).target/$(TARGET)/src/hello/hello.o \
 	$(obj).target/$(TARGET)/src/classexample/actualclass.o \
-	$(obj).target/$(TARGET)/src/classexample/classexample.o
+	$(obj).target/$(TARGET)/src/classexample/classexample.o \
+	$(obj).target/$(TARGET)/src/gst-basic-example/basic-example.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
@@ -103,13 +124,22 @@ $(OBJS): GYP_CXXFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_$(B
 
 # Suffix rules, putting all outputs into $(obj).
 
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.c FORCE_DO_CMD
+	@$(call do_cmd,cc,1)
+
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
 # Try building from generated source, too.
 
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.c FORCE_DO_CMD
+	@$(call do_cmd,cc,1)
+
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
+
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.c FORCE_DO_CMD
+	@$(call do_cmd,cc,1)
 
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
@@ -119,14 +149,31 @@ $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cpp FORCE_DO_CMD
 LDFLAGS_Debug := \
 	-pthread \
 	-rdynamic \
-	-m64
+	-m64 \
+	-L/home/griimick/github/gst-build/build/subprojects/gstreamer/libs/gst/base \
+	-L/home/griimick/github/gst-build/build/subprojects/gstreamer/gst \
+	-L/home/griimick/github/gst-build/build/subprojects/gst-plugins-bad/gst-libs/gst/webrtc \
+	-L/home/griimick/github/gst-build/build/subprojects/gst-plugins-base/gst-libs/gst/sdp
 
 LDFLAGS_Release := \
 	-pthread \
 	-rdynamic \
-	-m64
+	-m64 \
+	-L/home/griimick/github/gst-build/build/subprojects/gstreamer/libs/gst/base \
+	-L/home/griimick/github/gst-build/build/subprojects/gstreamer/gst \
+	-L/home/griimick/github/gst-build/build/subprojects/gst-plugins-bad/gst-libs/gst/webrtc \
+	-L/home/griimick/github/gst-build/build/subprojects/gst-plugins-base/gst-libs/gst/sdp
 
-LIBS :=
+LIBS := \
+	-lgstsdp-1.0 \
+	-lgstwebrtc-1.0 \
+	-lgstbase-1.0 \
+	-lgstreamer-1.0 \
+	-ljson-glib-1.0 \
+	-lsoup-2.4 \
+	-lgio-2.0 \
+	-lgobject-2.0 \
+	-lglib-2.0
 
 $(obj).target/testaddon.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(obj).target/testaddon.node: LIBS := $(LIBS)

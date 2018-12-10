@@ -9,8 +9,15 @@ class ActualClass {
 		ActualClass(double value); //constructor
 		double getValue(); //getter for the value
 		double add(double toAdd); //adds the toAdd value to the value_
-	private:
-		double value_;
+		int init();
+		int start();
+		int stop();
+		gboolean check_plugins();
+		int start_pipeline();
+	private: 
+		GOptionContext *context;
+		double dummy_opt;
 		GError * error;
 		GMainLoop * loop;
+		GstElement *pipe1;
 };
