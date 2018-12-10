@@ -55,3 +55,11 @@ Napi::Value ClassExample::Add(const Napi::CallbackInfo& info) {
 	return Napi::Number::New(info.Env(), answer);
 }
 
+Napi::Value ClassExample::init (const Napi::CallbackInfo& info) {
+	Napi::Env env = info.Env();
+	Napi::HandleScope scope(env);
+
+	int num = this->actualClass_->init ();
+	return Napi::Number::New(env, num);
+}
+
