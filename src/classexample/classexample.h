@@ -5,7 +5,7 @@
 
 class ClassExample : public Napi::ObjectWrap<ClassExample> {
 	public:
-		static Napi::Object Init(Napi::Env env, Napi::Object exports); //Init function for setting the export key to JS
+		static Napi::Object Init (Napi::Env env, Napi::Object exports); //Init function for setting the export key to JS
 		ClassExample(const Napi::CallbackInfo& info); //Constructor to initialise
 
 	private:
