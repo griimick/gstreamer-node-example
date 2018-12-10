@@ -13,6 +13,7 @@ Napi::Object ClassExample::Init(Napi::Env env, Napi::Object exports) {
 			InstanceMethod("getValue", &ClassExample::GetValue),
 			InstanceMethod("init", &ClassExample::Initialize),
 			InstanceMethod("startPipeline", &ClassExample::StartPipeline),
+			InstanceMethod("start", &ClassExample::Start),
 			});
 
 	constructor = Napi::Persistent(func);
@@ -63,6 +64,14 @@ Napi::Value ClassExample::Initialize (const Napi::CallbackInfo& info) {
 	Napi::HandleScope scope(env);
 
 	int num = this->actualClass_->init ();
+	return Napi::Number::New(env, num);
+}
+
+Napi::Value ClassExample::Start (const Napi::CallbackInfo& info) {
+	Napi::Env env = info.Env();
+	Napi::HandleScope scope(env);
+
+	int num = this->actualClass_->start ();
 	return Napi::Number::New(env, num);
 }
 

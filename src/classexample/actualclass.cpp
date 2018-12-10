@@ -46,6 +46,8 @@ int ActualClass::start()
 
 	//connect_to_websocket_server_async ();
 
+	this->start_pipeline();
+
 	g_main_loop_run(this->loop);
 	//g_main_loop_unref (this->loop);
 

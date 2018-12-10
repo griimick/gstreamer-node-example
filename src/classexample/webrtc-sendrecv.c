@@ -342,17 +342,13 @@ start_pipeline (void)
     g_error_free (error);
     goto err;
   }
-
+/*
   webrtc1 = gst_bin_get_by_name (GST_BIN (pipe1), "sendrecv");
   g_assert_nonnull (webrtc1);
 
-  /* This is the gstwebrtc entry point where we create the offer and so on. It
-   * will be called when the pipeline goes to PLAYING. */
   g_signal_connect (webrtc1, "on-negotiation-needed",
       G_CALLBACK (on_negotiation_needed), NULL);
-  /* We need to transmit this ICE candidate to the browser via the websockets
-   * signalling server. Incoming ice candidates from the browser need to be
-   * added by us too, see on_server_message() */
+
   g_signal_connect (webrtc1, "on-ice-candidate",
       G_CALLBACK (send_ice_candidate_message), NULL);
 
@@ -369,12 +365,10 @@ start_pipeline (void)
 
   g_signal_connect (webrtc1, "on-data-channel", G_CALLBACK (on_data_channel),
       NULL);
-  /* Incoming streams will be exposed via this signal */
   g_signal_connect (webrtc1, "pad-added", G_CALLBACK (on_incoming_stream),
       pipe1);
-  /* Lifetime is the same as the pipeline itself */
   gst_object_unref (webrtc1);
-
+*/
   g_print ("Starting pipeline\n");
   ret = gst_element_set_state (GST_ELEMENT (pipe1), GST_STATE_PLAYING);
   if (ret == GST_STATE_CHANGE_FAILURE)
@@ -682,7 +676,7 @@ main (int argc, char *argv[])
   GError *error = NULL;
 
   context = g_option_context_new ("- gstreamer webrtc sendrecv demo");
-  g_option_context_add_main_entries (context, entries, NULL);
+  //g_option_context_add_main_entries (context, entries, NULL);
   g_option_context_add_group (context, gst_init_get_option_group ());
   if (!g_option_context_parse (context, &argc, &argv, &error)) {
     g_printerr ("Error initializing: %s\n", error->message);
@@ -709,7 +703,9 @@ main (int argc, char *argv[])
 
   loop = g_main_loop_new (NULL, FALSE);
 
-  connect_to_websocket_server_async ();
+    if (!start_pipeline ())
+      cleanup_and_quit_loop ("ERROR: failed to start pipeline",
+          PEER_CALL_ERROR);
 
   g_main_loop_run (loop);
   g_main_loop_unref (loop);

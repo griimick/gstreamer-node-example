@@ -16,5 +16,6 @@ class ClassExample : public Napi::ObjectWrap<ClassExample> {
 
 		Napi::Value Initialize (const Napi::CallbackInfo &info);
 		Napi::Value StartPipeline (const Napi::CallbackInfo &info);
+		Napi::Value Start (const Napi::CallbackInfo &info);
 };
 
