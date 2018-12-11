@@ -12,7 +12,7 @@ const classInstance = new addon.ClassExample(4.3);
 
 //console.log('addCallback()   => ', addon.addCallback(2,4, (err, result) => console.log(`callback ${result} yay`) ));
 
-console.log(classInstance.init());
-console.log(classInstance.start());
+classInstance.init();
+classInstance.start();
 
 module.exports = addon;
