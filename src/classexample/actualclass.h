@@ -4,6 +4,8 @@
 #define GST_USE_UNSTABLE_API
 #include <gst/webrtc/webrtc.h>
 
+#include <napi.h>
+
 class ActualClass {
 	public:
 		ActualClass(double value); //constructor
@@ -14,10 +16,13 @@ class ActualClass {
 		int stop();
 		gboolean check_plugins();
 		int start_pipeline();
+		void set_function(Napi::Function& cb);
+		void call_function();
 	private: 
 		GOptionContext *context;
 		double dummy_opt;
 		GError * error;
 		GMainLoop * loop;
 		GstElement *pipe1;
+		Napi::FunctionReference callback;
 };

@@ -68,7 +68,7 @@ int ActualClass::start_pipeline(void)
 	GError *error = NULL;
 	GstElement *pipe;
 
-/*
+	/*
 	this->pipe1 =
 		gst_parse_launch("webrtcbin bundle-policy=max-bundle name=sendrecv " STUN_SERVER
 						 "videotestsrc is-live=true pattern=ball ! videoconvert ! queue ! vp8enc deadline=1 ! rtpvp8pay ! "
@@ -92,7 +92,7 @@ int ActualClass::start_pipeline(void)
 	ret = gst_element_set_state(GST_ELEMENT(this->pipe1), GST_STATE_PLAYING);
 	if (ret == GST_STATE_CHANGE_FAILURE)
 		printf("ERORR IN STARTING PIPELINE: %s\n", ret);
-		return -3;
+	return -3;
 
 	return 0;
 }
@@ -137,4 +137,14 @@ gboolean ActualClass::check_plugins(void)
 		gst_object_unref(plugin);
 	}
 	return ret;
+}
+
+void ActualClass::set_function(Napi::Function& cb)
+{
+	this->callback = Napi::Reference<Napi::Function>::New(cb, 1);
+}
+
+void ActualClass::call_function()
+{
+	this->callback.Call({});
 }
